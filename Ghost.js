@@ -65,12 +65,12 @@ Ghost.prototype.draw = function() {
 		else{
 			ctx.fillStyle = this.color;
 		}
-		
+
 		ctx.beginPath();
 
 		ctx.arc(this.x, this.y, this.radius, Math.PI, 0, false);
 		ctx.moveTo(this.x-this.radius, this.y);
-		
+
 
 		// LEGS
 		if (!this.isMoving){
@@ -94,7 +94,7 @@ Ghost.prototype.draw = function() {
 			ctx.lineTo(this.x+this.radius, this.y+this.radius-this.radius/4);
 			ctx.lineTo(this.x+this.radius, this.y);
 		}
-		
+
 
 		ctx.fill();
 	}
@@ -200,7 +200,7 @@ Ghost.prototype.draw = function() {
 	}
 
 
-	
+
 };
 
 Ghost.prototype.getRow = function() {
@@ -251,7 +251,7 @@ Ghost.prototype.moveOneStep = function() {
 			this.x = newX;
 		}
 		break;
-		
+
 		default:
 		break;
 	}
@@ -342,6 +342,10 @@ Ghost.prototype.move = function() {
 					break;
 
 					case CYAN:
+					//inky
+					this.inkyMove();
+					break;
+
 					case ORANGE:
 					//inky
 					this.inkyMove();
@@ -360,7 +364,18 @@ Ghost.prototype.move = function() {
 
 //blinky always chooses the tile that will make it closest to pacman
 Ghost.prototype.blinkyMove = function() {
-	this.moveToPacman(true);
+	// console.log("DIR: ", this.dir);
+	// console.log("FALSE: ", this.getTestDistanceTest(this.dir,false));
+	// console.log("TRUE: ", this.getTestDistanceTest(this.dir,true));
+	var distance = this.getTestDistanceTest(this.dir,true);
+
+	if(getMovingState(distance)){
+		console.log("DISTANCE: ", distance, " STATE: ATACK");
+		this.moveToPacman(true);
+	}else{
+		console.log("DISTANCE: ", distance, " STATE: SEARCH");
+		this.randomMove();
+	}
 };
 
 //pinky chooses the tile that is 4 steps ahead of pacman
@@ -468,11 +483,43 @@ Ghost.prototype.getTestDistance = function(dir, targetPacman) {
 	return toReturn;
 };
 
+Ghost.prototype.getTestDistanceTest = function(dir, targetPacman) {
+	var toReturn = 0;
+	this.dir = dir;
+	if(targetPacman){
+		toReturn = Math.sqrt(Math.pow( (this.x - mrPacman.x)  ,2)+Math.pow( this.y -mrPacman.y,2));
+	}
+	else{
+		switch(mrPacman.dir){
+			case LEFT:
+			toReturn = Math.sqrt(Math.pow( (this.x - (mrPacman.x - 4*GRID_WIDTH))  ,2)+Math.pow( this.y -mrPacman.y,2));
+			break;
+
+			case RIGHT:
+			toReturn = Math.sqrt(Math.pow( (this.x - (mrPacman.x + 4*GRID_WIDTH))  ,2)+Math.pow( this.y -mrPacman.y,2));
+			break;
+
+			case UP:
+			toReturn = Math.sqrt(Math.pow( (this.x - mrPacman.x)  ,2)+Math.pow( this.y - (mrPacman.y - 4*GRID_HEIGHT),2));
+			break;
+
+			case DOWN:
+			toReturn = Math.sqrt(Math.pow( (this.x - mrPacman.x)  ,2)+Math.pow( this.y - (mrPacman.y  + 4*GRID_HEIGHT),2));
+			break;
+
+			default:
+			toReturn = Math.sqrt(Math.pow( (this.x - mrPacman.x)  ,2)+Math.pow( this.y -mrPacman.y,2));
+			break;
+
+		}
+	}
+	return toReturn;
+};
 //make random move at intersection
 Ghost.prototype.randomMove = function() {
 	var nextDir =  parseInt(Math.random()*4)+1;
 	while(true){
-		if( nextDir != oppositeDir(this.dir) 
+		if( nextDir != oppositeDir(this.dir)
 			&& canMove(this.x, this.y, nextDir)){
 			break;
 		}

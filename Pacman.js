@@ -9,6 +9,7 @@ function Pacman(xCord, yCord, direction){
 	this.nextDir = undefined; //the direction to turn at next available turning point
 	this.radius = PACMAN_RADIUS;
 	this.mouthOpen = true;
+	this.speed = 7;
 }
 
 
@@ -68,8 +69,8 @@ Pacman.prototype.draw = function(color) {
 	}
 
 
-	
-	
+
+
 	ctx.lineTo(this.x, this.y);
 	ctx.fill();
 };
@@ -121,7 +122,7 @@ Pacman.prototype.move = function() {
 			if(this.canMove(this.dir)){
 				this.moveOneStep();
 			}
-		}	
+		}
 	}
 };
 
@@ -168,13 +169,8 @@ Pacman.prototype.moveOneStep = function() {
 			this.mouthOpen = ! this.mouthOpen;
 		}
 		break;
-		
+
 		default:
 		break;
 	}
 };
-
-
-
-
-

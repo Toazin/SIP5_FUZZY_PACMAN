@@ -91,50 +91,50 @@ var mazeContent = [
 //row3
 [LEFT_BOTTOM, RIGHT_TOP, LEFT_RIGHT, LEFT_RIGHT, LEFT_RIGHT,
  BOTTOM_LEFT_TOP, TOP_BOTTOM, EMPTY_GRID, TOP_BOTTOM, TOP_BOTTOM,
- TOP_BOTTOM, TOP_BOTTOM, TOP_BOTTOM, RIGHT_TOP, LEFT_ONLY, 
+ TOP_BOTTOM, TOP_BOTTOM, TOP_BOTTOM, RIGHT_TOP, LEFT_ONLY,
  EMPTY_GRID, RIGHT_ONLY],
 //row4
-[CLOSED_GRID, LEFT_RIGHT, LEFT_RIGHT, LEFT_RIGHT, LEFT_BOTTOM, 
+[CLOSED_GRID, LEFT_RIGHT, LEFT_RIGHT, LEFT_RIGHT, LEFT_BOTTOM,
  TOP_BOTTOM, RIGHT_TOP, LEFT_RIGHT, BOTTOM_LEFT_TOP, TOP_BOTTOM,
  TOP_BOTTOM, TOP_BOTTOM, TOP_RIGHT_BOTTOM, LEFT_RIGHT, LEFT_ONLY,
  EMPTY_GRID, RIGHT_ONLY],
 //row5
-[LEFT_TOP, RIGHT_BOTTOM, LEFT_RIGHT, LEFT_BOTTOM, TOP_ONLY, 
+[LEFT_TOP, RIGHT_BOTTOM, LEFT_RIGHT, LEFT_BOTTOM, TOP_ONLY,
  TOP_RIGHT_BOTTOM, LEFT_RIGHT, LEFT_ONLY, TOP_BOTTOM, TOP_BOTTOM,
  TOP_BOTTOM, TOP_ONLY, TOP_BOTTOM, RIGHT_BOTTOM, LEFT_ONLY,
  EMPTY_GRID, RIGHT_ONLY],
 //row6
 [LEFT_RIGHT, BOTTOM_LEFT_TOP, BOTTOM_ONLY, TOP_RIGHT_BOTTOM, LEFT_RIGHT,
  BOTTOM_LEFT_TOP, RIGHT_BOTTOM, LEFT_RIGHT, LEFT_TOP, TOP_BOTTOM,
- RIGHT_TOP, LEFT_RIGHT, BOTTOM_LEFT_TOP, TOP_BOTTOM, BOTTOM_ONLY, 
+ RIGHT_TOP, LEFT_RIGHT, BOTTOM_LEFT_TOP, TOP_BOTTOM, BOTTOM_ONLY,
  BOTTOM_ONLY, RIGHT_BOTTOM],
 //row7
-[LEFT_ONLY, TOP_BOTTOM, TOP_BOTTOM, TOP_BOTTOM, BOTTOM_ONLY, 
- TOP_BOTTOM, TOP_BOTTOM, RIGHT_ONLY, LEFT_RIGHT, LEFT_TOP_RIGHT, 
+[LEFT_ONLY, TOP_BOTTOM, TOP_BOTTOM, TOP_BOTTOM, BOTTOM_ONLY,
+ TOP_BOTTOM, TOP_BOTTOM, RIGHT_ONLY, LEFT_RIGHT, LEFT_TOP_RIGHT,
  LEFT_RIGHT, LEFT_ONLY, TOP_BOTTOM, TOP_BOTTOM, TOP_BOTTOM,
  TOP_BOTTOM, RIGHT_TOP],
 //row8
 [LEFT_RIGHT, BOTTOM_LEFT_TOP, TOP_BOTTOM, TOP_BOTTOM, TOP_BOTTOM,
- TOP_BOTTOM, TOP_RIGHT_BOTTOM, LEFT_RIGHT, LEFT_RIGHT, LEFT_RIGHT, 
+ TOP_BOTTOM, TOP_RIGHT_BOTTOM, LEFT_RIGHT, LEFT_RIGHT, LEFT_RIGHT,
  LEFT_RIGHT, LEFT_RIGHT, BOTTOM_LEFT_TOP, TOP_BOTTOM, TOP_BOTTOM,
  TOP_RIGHT_BOTTOM, LEFT_RIGHT],
 //row9
 [LEFT_BOTTOM, TOP_BOTTOM, TOP_BOTTOM, TOP_BOTTOM, TOP_ONLY,
- TOP_BOTTOM, TOP_BOTTOM, RIGHT_ONLY, LEFT_RIGHT, LEFT_RIGHT, 
+ TOP_BOTTOM, TOP_BOTTOM, RIGHT_ONLY, LEFT_RIGHT, LEFT_RIGHT,
  LEFT_RIGHT, LEFT_ONLY, TOP_BOTTOM, TOP_BOTTOM, TOP_BOTTOM,
  TOP_BOTTOM, RIGHT_ONLY],
 //row10
-[LEFT_TOP, TOP_ONLY, TOP_ONLY, RIGHT_TOP, LEFT_RIGHT, 
+[LEFT_TOP, TOP_ONLY, TOP_ONLY, RIGHT_TOP, LEFT_RIGHT,
  BOTTOM_LEFT_TOP, TOP_RIGHT_BOTTOM, LEFT_RIGHT, RIGHT_BOTTOM_LEFT, LEFT_RIGHT,
  RIGHT_BOTTOM_LEFT, LEFT_RIGHT, BOTTOM_LEFT_TOP, TOP_BOTTOM, TOP_BOTTOM,
  TOP_RIGHT_BOTTOM, LEFT_RIGHT],
 //row11
 [LEFT_ONLY, EMPTY_GRID, EMPTY_GRID, RIGHT_ONLY, LEFT_ONLY,
- TOP_BOTTOM, TOP_BOTTOM, BOTTOM_ONLY, TOP_ONLY, BOTTOM_ONLY, 
+ TOP_BOTTOM, TOP_BOTTOM, BOTTOM_ONLY, TOP_ONLY, BOTTOM_ONLY,
  TOP_BOTTOM, BOTTOM_ONLY, TOP_ONLY, TOP_BOTTOM, TOP_BOTTOM,
  TOP_BOTTOM, RIGHT_ONLY],
 //row12
-[LEFT_ONLY, EMPTY_GRID, EMPTY_GRID, RIGHT_ONLY, LEFT_RIGHT, 
+[LEFT_ONLY, EMPTY_GRID, EMPTY_GRID, RIGHT_ONLY, LEFT_RIGHT,
  BOTTOM_LEFT_TOP, TOP_BOTTOM, RIGHT_TOP, LEFT_RIGHT, BOTTOM_LEFT_TOP,
  TOP_BOTTOM, RIGHT_TOP, LEFT_RIGHT, BOTTOM_LEFT_TOP, TOP_BOTTOM,
  RIGHT_TOP, LEFT_RIGHT],
@@ -144,12 +144,12 @@ var mazeContent = [
  TOP_RIGHT_BOTTOM, LEFT_RIGHT, LEFT_ONLY, TOP_BOTTOM, RIGHT_TOP,
  LEFT_RIGHT, LEFT_RIGHT],
 //row14
-[LEFT_ONLY, EMPTY_GRID, EMPTY_GRID, RIGHT_ONLY, LEFT_RIGHT, 
+[LEFT_ONLY, EMPTY_GRID, EMPTY_GRID, RIGHT_ONLY, LEFT_RIGHT,
  LEFT_TOP, TOP_BOTTOM, RIGHT_BOTTOM, LEFT_RIGHT, BOTTOM_LEFT_TOP,
- TOP_BOTTOM, RIGHT_ONLY, LEFT_RIGHT, LEFT_TOP_RIGHT, LEFT_RIGHT, 
+ TOP_BOTTOM, RIGHT_ONLY, LEFT_RIGHT, LEFT_TOP_RIGHT, LEFT_RIGHT,
  LEFT_RIGHT, LEFT_RIGHT],
 //row15
-[LEFT_ONLY, EMPTY_GRID, EMPTY_GRID, RIGHT_ONLY, LEFT_RIGHT, 
+[LEFT_ONLY, EMPTY_GRID, EMPTY_GRID, RIGHT_ONLY, LEFT_RIGHT,
  LEFT_RIGHT, BOTTOM_LEFT_TOP, TOP_BOTTOM, EMPTY_GRID, TOP_BOTTOM,
  TOP_RIGHT_BOTTOM, LEFT_RIGHT, LEFT_RIGHT, LEFT_RIGHT, LEFT_RIGHT,
  LEFT_RIGHT, LEFT_RIGHT],
@@ -160,7 +160,7 @@ var mazeContent = [
  RIGHT_BOTTOM_LEFT, LEFT_RIGHT],
 //row17
 [LEFT_BOTTOM, BOTTOM_ONLY, BOTTOM_ONLY, RIGHT_BOTTOM, LEFT_BOTTOM,
- TOP_BOTTOM, TOP_BOTTOM, TOP_BOTTOM, BOTTOM_ONLY, TOP_BOTTOM, 
+ TOP_BOTTOM, TOP_BOTTOM, TOP_BOTTOM, BOTTOM_ONLY, TOP_BOTTOM,
  TOP_BOTTOM, TOP_BOTTOM, RIGHT_BOTTOM, RIGHT_BOTTOM_LEFT, LEFT_BOTTOM,
  TOP_BOTTOM, RIGHT_BOTTOM]
 ];
@@ -214,7 +214,7 @@ function initMaze(){
 		for(var col = 0; col < CANVAS_WIDTH/GRID_WIDTH; col++){
 			var beanType = NORMAL_BEAN;
 			var newGrid = new Grid(col*GRID_WIDTH,row*GRID_HEIGHT , mazeContent[row][col],beanType);
-			
+
 			maze[row][col] = newGrid;
 			newGrid.draw();
 		}
@@ -473,7 +473,7 @@ function canMove (x,y,dir) {
 	switch(dir){
 		case UP:
 		if(gridType != LEFT_TOP && gridType != RIGHT_TOP && gridType != TOP_BOTTOM
-			&& gridType != TOP_ONLY && gridType!= LEFT_TOP_RIGHT 
+			&& gridType != TOP_ONLY && gridType!= LEFT_TOP_RIGHT
 			&& gridType != TOP_RIGHT_BOTTOM && gridType!= BOTTOM_LEFT_TOP){
 			canMove = true;
 		}
@@ -497,7 +497,7 @@ function canMove (x,y,dir) {
 
 		case RIGHT:
 		if(gridType != RIGHT_BOTTOM && gridType != RIGHT_TOP && gridType != RIGHT_ONLY
-			&& gridType != LEFT_RIGHT && gridType!= RIGHT_BOTTOM_LEFT 
+			&& gridType != LEFT_RIGHT && gridType!= RIGHT_BOTTOM_LEFT
 			&& gridType != TOP_RIGHT_BOTTOM && gridType != LEFT_TOP_RIGHT){
 			canMove = true;
 		}
@@ -639,7 +639,7 @@ function loseMessage(){
 	ctx.fillText("press R to play again", CANVAS_HEIGHT/2, CANVAS_HEIGHT/2+28);
 }
 
-//update canvas for each frame. 
+//update canvas for each frame.
 function updateCanvas() {
 	restartTimer++;
 	if (gameOver()===true){
@@ -653,14 +653,14 @@ function updateCanvas() {
 			for(var i=0; i<ghosts.length; i++){
 				fixGrids(ghosts[i].x, ghosts[i].y);
 			}
-			run();	
+			run();
 		}
 		else {
 			clearInterval(intervalId);
 			sleep(500);
 			loseMessage();
 		}
-		
+
 	}
 	else if (pacmanWon()===true){
 		clearInterval(intervalId);
@@ -787,7 +787,7 @@ function countDown () {
 					intervalId = setInterval(updateCanvas, timerDelay);
 				},500);
 			}, 1000);
-		}, 1000);	
+		}, 1000);
 	}, 1000);
 }
 /*==================END UI Update Methods================*/
@@ -803,7 +803,7 @@ function onKeyDown (event) {
 	var godModeCode = 71; //g to enter god mode
 
 	// wasd
-	var wCode = 87; 
+	var wCode = 87;
 	var aCode = 65;
 	var sCode = 83;
 	var dCode = 68;
@@ -820,7 +820,8 @@ function onKeyDown (event) {
 			gameOn = true;
 			gamePaused = false;
 			initMaze();
-			run();
+			// run();
+            runTest();
 			return;
 		}
 		else if(keycode === godModeCode){
@@ -829,7 +830,8 @@ function onKeyDown (event) {
 			gameOn = true;
 			gamePaused = false;
 			initMaze();
-			run(true);
+			// run(true);
+            runTest(true);
 			return;
 		}
 	}
@@ -860,7 +862,8 @@ function onKeyDown (event) {
 			life = MAX_LIFE;
 			beansLeft = MAX_BEANS;
 			initMaze();
-			run();
+			// run();
+            runTest();
 		}
 
 		//4-way controls
@@ -889,13 +892,13 @@ function onKeyDown (event) {
 			break;
 
 		}
-	}	
+	}
 }
 
 //run the game. Create mrPacman and 4 ghosts. Reset their positions.
 function run(isGodMode) {
 	showScore();
-    
+
     mrPacman = new Pacman(pacmanStartLoc[1]*GRID_WIDTH + GRID_WIDTH/2, pacmanStartLoc[0]*GRID_HEIGHT + GRID_HEIGHT/2, RIGHT);
     if(isGodMode===undefined || !isGodMode){
 	    blinky = new Ghost(0,0, RED, DOWN);
@@ -924,6 +927,29 @@ function run(isGodMode) {
 	mrPacman.draw();
 	countDown();
 }
+
+function runTest(isGodMode) {
+	showScore();
+
+    mrPacman = new Pacman(pacmanStartLoc[1]*GRID_WIDTH + GRID_WIDTH/2, pacmanStartLoc[0]*GRID_HEIGHT + GRID_HEIGHT/2, RIGHT);
+    if(isGodMode===undefined || !isGodMode){
+	    blinky = new Ghost(0,0, RED, DOWN);
+
+	    blinky.toGhostHouse();
+
+	    ghosts = [blinky];
+
+		blinky.draw();
+	}
+	else{
+		ghosts = [];
+	}
+	showLives();
+	printInstruction();
+
+	mrPacman.draw();
+	countDown();
+}
 /*===============END Game Control Methods===================*/
 
 
@@ -935,5 +961,3 @@ canvas.addEventListener('keydown', onKeyDown, false);
 canvas.setAttribute('tabindex','0');
 canvas.focus();
 welcomeScreen();
-
-
